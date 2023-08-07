@@ -1,40 +1,76 @@
 ﻿using System;
 
-namespace UnitConverter
+string[] METRIC_UNITS = { "Milimeter", "Centimeter", "Decimeter", "Meter", "Decameter", "Hectometer", "Kilometer" };
+string[] IMPERIAL_UNITS = { "Inch", "Feet", "Yard", "Mile" };
+string SORRY = "Sorry. I don't understand.";
+
+
+Console.Write("Please type 'Metric'/'Imperial'/'Temperature' to start: ");
+string startingGroup = Console.ReadLine().ToLower();
+switch (startingGroup)
 {
-    internal class Program
-    {
-        static void Main(string[] args)
+    case "metric":
+        Console.Write("Do you want to convert to 'Imperial' or convert one 'Meteric' unit to another?: ");
+        string metricConvertTo = Console.ReadLine().ToLower();
+        switch (metricConvertTo)
         {
-            Console.WriteLine("Hello World!");
-            double cTemp = ConvertToCelsius(30);
-            double fTemp = ConvertToFahrenheit(30);
-            double mile = ConvertToMiles(30);
-            double kilometer = ConvertToKilometers(100);
-            Console.WriteLine(cTemp);
-            Console.WriteLine(fTemp);
-            Console.WriteLine(mile);
-            Console.WriteLine(kilometer);
+            case "imperial":
+                ConvertToImperial();
+                break;
+            case "meteric":
+                Metric();
+                break;
+            default:
+                Console.WriteLine(SORRY);
+                break;
         }
+        break;
+    case "imperial":
+        Console.Write("Do you want to convert to 'Metric' or convert one 'Imperial' unit to another?: ");
+        string imperialConvertTo = Console.ReadLine().ToLower();
+        switch (imperialConvertTo)
+        {
+            case "metric":
+                ConvertToMetric();
+                break;
+            case "imperial":
+                Imperial();
+                break;
+            default:
+                Console.WriteLine(SORRY);
+                break;
+        }
+        
+        break;
+    case "temperature":
+        Temperature();
+        break;
+    default:
+        Console.WriteLine(SORRY);
+        break;
+}
 
-        static double ConvertToCelsius(double fahrenheit)
-        {
-            return Math.Round((fahrenheit - 32) * 0.5556, 2);
-        }
+void Metric()
+{
+    
+}
 
-        static double ConvertToFahrenheit(double celsius)
-        {
-            return Math.Round((celsius * 1.8)) + 32;
-        }
+void Imperial()
+{
 
-        static double ConvertToMiles(double kilometers)
-        {
-            return Math.Round(kilometers * 0.6213711922,2);
-        }
+}
 
-        static double ConvertToKilometers(double miles)
-        {
-            return Math.Round(miles * 1.609344, 2);
-        }
-    }
+void Temperature()
+{
+
+}
+
+void ConvertToImperial()
+{
+
+}
+
+void ConvertToMetric()
+{
+    Console.WriteLine("You want to convert a imperial unit to metric");
 }

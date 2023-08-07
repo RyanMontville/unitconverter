@@ -1,8 +1,15 @@
 ﻿using System;
 
-string[] METRIC_UNITS = { "Milimeter", "Centimeter", "Decimeter", "Meter", "Decameter", "Hectometer", "Kilometer" };
+var METRIC_UNITS = new Dictionary<string, int>
+{
+    ["Milimeter"] = 1,
+    ["Centimeter"] = 10,
+    ["Meter"] = 100,
+    ["Kilometer"] = 1000
+};
 string[] IMPERIAL_UNITS = { "Inch", "Feet", "Yard", "Mile" };
 string SORRY = "Sorry. I don't understand.";
+double[] METRIC_DECIMALS = { .1, .1, .01, .001 };
 
 
 Console.Write("Please type 'Metric'/'Imperial'/'Temperature' to start: ");
@@ -10,14 +17,14 @@ string startingGroup = Console.ReadLine().ToLower();
 switch (startingGroup)
 {
     case "metric":
-        Console.Write("Do you want to convert to 'Imperial' or convert one 'Meteric' unit to another?: ");
+        Console.Write("Do you want to convert to 'Imperial' or convert one 'Metric' unit to another?: ");
         string metricConvertTo = Console.ReadLine().ToLower();
         switch (metricConvertTo)
         {
             case "imperial":
                 ConvertToImperial();
                 break;
-            case "meteric":
+            case "metric":
                 Metric();
                 break;
             default:
@@ -52,7 +59,31 @@ switch (startingGroup)
 
 void Metric()
 {
-    
+    int startingUnitMetric = MenuOptions(METRIC_UNITS, "starting unit");
+    int endingUnitmetric = MenuOptions(METRIC_UNITS, "ending unit");
+    Console.Write("Enter the starting number: ");
+    double start_num_metric = double.Parse(Console.ReadLine());
+    double end_num_metric = 1;
+    if(startingUnitMetric != -1 && endingUnitmetric != -1)
+    {
+        if (startingUnitMetric < endingUnitmetric)
+        {
+            for(int i=startingUnitMetric+1; i <= endingUnitmetric; i++)
+            {
+                end_num_metric *= METRIC_DECIMALS[i];
+            }
+        } else
+        {
+            for(int i=startingUnitMetric;i<= endingUnitmetric; i++)
+            {
+                end_num_metric *= METRIC_UNITS.ElementAt(i).Value;
+            }
+        }
+        double finalMetric = end_num_metric * start_num_metric;
+        Console.WriteLine("starting number " + start_num_metric + " * " + end_num_metric + " = " + finalMetric);
+        Console.Write(start_num_metric + " " + METRIC_UNITS.ElementAt(startingUnitMetric).Key +
+            " is " + Math.Round(finalMetric, 6) + " " + METRIC_UNITS.ElementAt(endingUnitmetric).Key);
+    }
 }
 
 void Imperial()
@@ -62,6 +93,7 @@ void Imperial()
 
 void Temperature()
 {
+    Console.WriteLine();
     Console.WriteLine("1.Convert fahrenheit to celsius");
     Console.WriteLine("2.Convert celsius to fahrenheit");
     Console.Write("Please make a number selection: ");
@@ -96,4 +128,23 @@ void ConvertToImperial()
 void ConvertToMetric()
 {
     Console.WriteLine("You want to convert a imperial unit to metric");
+}
+
+int MenuOptions(Dictionary<string, int> options,string message)
+{
+    Console.WriteLine();
+    for (int i = 0; i < options.Count; i++)
+    {
+        Console.WriteLine(i + "." + options.ElementAt(i).Key);
+    }
+    Console.Write("Please make a number selection for the " + message +": ");
+    int index =  int.Parse(Console.ReadLine());
+    if(index >=0 && index < options.Count)
+    {
+        return index;
+    } else
+    {
+        Console.WriteLine("Sorry. That number is not on the list.");
+        return -1;
+    }
 }

@@ -62,6 +62,29 @@ void Imperial()
 
 void Temperature()
 {
+    Console.WriteLine("1.Convert fahrenheit to celsius");
+    Console.WriteLine("2.Convert celsius to fahrenheit");
+    Console.Write("Please make a number selection: ");
+    string choice = Console.ReadLine();
+    switch (choice)
+    {
+        case "1":
+            Console.Write("Input the temperature in fahrenheit: ");
+            double fromFahrenheit = double.Parse(Console.ReadLine());
+
+            double toCelsius = Math.Round((fromFahrenheit - 32) * 0.5556, 2);
+            Console.WriteLine(fromFahrenheit + "°F is " + toCelsius + "°C");
+            break;
+        case "2":
+            Console.Write("Input the temperature in celsius: ");
+            double fromCelsius = double.Parse(Console.ReadLine());
+            double toFahrenheit = Math.Round(fromCelsius * 1.8) + 32;
+            Console.WriteLine(fromCelsius + "°C is " + toFahrenheit + "°F");
+            break;
+        default:
+            Console.WriteLine(SORRY);
+            break;
+    }
 
 }
 

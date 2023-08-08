@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 var METRIC_UNITS = new Dictionary<string, int>
 {
@@ -10,52 +11,60 @@ var METRIC_UNITS = new Dictionary<string, int>
 string[] IMPERIAL_UNITS = { "Inch", "Feet", "Yard", "Mile" };
 string SORRY = "Sorry. I don't understand.";
 double[] METRIC_DECIMALS = { .1, .1, .01, .001 };
+bool end_program = false;
 
+while(!end_program) {
+    Console.Write("\n\nPlease type 'Metric'/'Imperial'/'Temperature' to start or 'End' to close the program: ");
+    string startingGroup = Console.ReadLine().ToLower();
+    switch (startingGroup)
+    {
+        case "metric":
+            Console.Write("Do you want to convert to 'Imperial' or convert one 'Metric' unit to another?: ");
+            string metricConvertTo = Console.ReadLine().ToLower();
+            switch (metricConvertTo)
+            {
+                case "imperial":
+                    ConvertToImperial();
+                    break;
+                case "metric":
+                    Metric();
+                    break;
+                default:
+                    Console.WriteLine(SORRY);
+                    break;
+            }
+            break;
+        case "imperial":
+            Console.Write("Do you want to convert to 'Metric' or convert one 'Imperial' unit to another?: ");
+            string imperialConvertTo = Console.ReadLine().ToLower();
+            switch (imperialConvertTo)
+            {
+                case "metric":
+                    ConvertToMetric();
+                    break;
+                case "imperial":
+                    Imperial();
+                    break;
+                default:
+                    Console.WriteLine(SORRY);
+                    break;
+            }
 
-Console.Write("Please type 'Metric'/'Imperial'/'Temperature' to start: ");
-string startingGroup = Console.ReadLine().ToLower();
-switch (startingGroup)
-{
-    case "metric":
-        Console.Write("Do you want to convert to 'Imperial' or convert one 'Metric' unit to another?: ");
-        string metricConvertTo = Console.ReadLine().ToLower();
-        switch (metricConvertTo)
-        {
-            case "imperial":
-                ConvertToImperial();
-                break;
-            case "metric":
-                Metric();
-                break;
-            default:
-                Console.WriteLine(SORRY);
-                break;
-        }
-        break;
-    case "imperial":
-        Console.Write("Do you want to convert to 'Metric' or convert one 'Imperial' unit to another?: ");
-        string imperialConvertTo = Console.ReadLine().ToLower();
-        switch (imperialConvertTo)
-        {
-            case "metric":
-                ConvertToMetric();
-                break;
-            case "imperial":
-                Imperial();
-                break;
-            default:
-                Console.WriteLine(SORRY);
-                break;
-        }
-        
-        break;
-    case "temperature":
-        Temperature();
-        break;
-    default:
-        Console.WriteLine(SORRY);
-        break;
+            break;
+        case "temperature":
+            Temperature();
+            break;
+        case "end":
+            end_program = true;
+            break;
+        default:
+            Console.WriteLine(SORRY);
+            break;
+    }
 }
+
+
+
 
 void Metric()
 {
@@ -74,13 +83,12 @@ void Metric()
             }
         } else
         {
-            for(int i=startingUnitMetric;i<= endingUnitmetric; i++)
+            for(int i=startingUnitMetric;i> endingUnitmetric; i--)
             {
                 end_num_metric *= METRIC_UNITS.ElementAt(i).Value;
             }
         }
         double finalMetric = end_num_metric * start_num_metric;
-        Console.WriteLine("starting number " + start_num_metric + " * " + end_num_metric + " = " + finalMetric);
         Console.Write(start_num_metric + " " + METRIC_UNITS.ElementAt(startingUnitMetric).Key +
             " is " + Math.Round(finalMetric, 6) + " " + METRIC_UNITS.ElementAt(endingUnitmetric).Key);
     }

@@ -16,6 +16,11 @@ var IMPERIAL_UNITS = new Dictionary<string, int>
     ["Yard"] = 3,
     ["Mile"] = 1760
 };
+var TEMPERATURE_OPTIONS = new Dictionary<string, int>
+{
+    ["Convert fahrenheit to celsius"] = 0,
+    ["Convert celsius to fahrenheit"] = 1
+};
 string SORRY = "Sorry. I don't understand.";
 double[] METRIC_DECIMALS = { .1, .1, .01, .001 };
 bool end_program = false;
@@ -39,7 +44,11 @@ while(!end_program) {
             switch (metricConvertTo)
             {
                 case "imperial":
-                    ConvertToImperial();
+                    double meterNumber = Metric(startingUnitMetric, 2, startingNumMetric);
+                    int imperialConvertUnit = MenuOptions(IMPERIAL_UNITS, "imerial unit to convert to");
+                    double imperialConverted = ConvertToImperial(meterNumber, imperialConvertUnit);
+                    Console.WriteLine(startingNumMetric + " " + METRIC_UNITS.ElementAt(startingUnitMetric).Key + 
+                        " is " + imperialConverted + " " + IMPERIAL_UNITS.ElementAt(imperialConvertUnit).Key);
                     break;
                 case "metric":
                     int endingUnitmetric = MenuOptions(METRIC_UNITS, "ending unit");
@@ -69,7 +78,11 @@ while(!end_program) {
             switch (imperialConvertTo)
             {
                 case "metric":
-                    ConvertToMetric();
+                    double yardNumber = Imperial(startingUnitImperial, 2, startingNumImperial);
+                    int metricConvertUnit = MenuOptions(METRIC_UNITS, "metric unit to convert to");
+                    double ConvertedMetric = ConvertToMetric(yardNumber, metricConvertUnit);
+                    Console.WriteLine(startingNumImperial + " " + IMPERIAL_UNITS.ElementAt(startingUnitImperial).Key + 
+                        " is " + ConvertedMetric + " " + METRIC_UNITS.ElementAt(metricConvertUnit).Key);
                     break;
                 case "imperial":
                     int endingUnitImperial = MenuOptions(IMPERIAL_UNITS, "ending unit");
@@ -96,65 +109,56 @@ while(!end_program) {
     }
 }
 
-
-
-
-double Metric(int startingUnitMetric, int endingUnitmetric, double start_num_metric)
+double Metric(int startingUnitMetric, int endingUnitmetric, double metricNumber)
 {
-    double metric_end = 1;
         if (startingUnitMetric < endingUnitmetric)
         {
             for (int i = startingUnitMetric + 1; i <= endingUnitmetric; i++)
             {
-            metric_end *= METRIC_DECIMALS[i];
+            metricNumber *= METRIC_DECIMALS[i];
             }
         }
         else
         {
             for (int i = startingUnitMetric; i > endingUnitmetric; i--)
             {
-            metric_end *= METRIC_UNITS.ElementAt(i).Value;
+            metricNumber *= METRIC_UNITS.ElementAt(i).Value;
             }
         }
-    return metric_end * start_num_metric;
+    return metricNumber;
 }
 
-double Imperial(int startingUnitImperial, int endingUnitImperial, double startingNumImperial)
+double Imperial(int startingUnitImperial, int endingUnitImperial, double imperialNumber)
 {
-    double end_num_imperial = 1;
-    
     if(startingUnitImperial > endingUnitImperial)
     {
         for(int i= startingUnitImperial; i > endingUnitImperial; i--)
         {
-            end_num_imperial *= IMPERIAL_UNITS.ElementAt(i).Value;
+            imperialNumber *= IMPERIAL_UNITS.ElementAt(i).Value;
         }
     } else
     {
         for(int i=startingUnitImperial+1; i <=  endingUnitImperial; i++)
         {
-            end_num_imperial /= IMPERIAL_UNITS.ElementAt(i).Value;
+            imperialNumber /= IMPERIAL_UNITS.ElementAt(i).Value;
         }
     }
-    return end_num_imperial * startingNumImperial;
+    return imperialNumber;
 }
 
 void Temperature()
 {
     Console.WriteLine();
-    Console.WriteLine("1.Convert fahrenheit to celsius");
-    Console.WriteLine("2.Convert celsius to fahrenheit");
-    Console.Write("Please make a number selection: ");
-    string choice = Console.ReadLine();
+    int choice = MenuOptions(TEMPERATURE_OPTIONS, "temperature converstion");
     switch (choice)
     {
-        case "1":
+        case 0:
             double fromFahrenheit = NumberInput("fahrenheit");
 
             double toCelsius = Math.Round((fromFahrenheit - 32) * 0.5556, 2);
             Console.WriteLine(fromFahrenheit + "°F is " + toCelsius + "°C");
             break;
-        case "2":
+        case 1:
             double fromCelsius = NumberInput("celsius");
             double toFahrenheit = Math.Round(fromCelsius * 1.8) + 32;
             Console.WriteLine(fromCelsius + "°C is " + toFahrenheit + "°F");
@@ -166,14 +170,17 @@ void Temperature()
 
 }
 
-void ConvertToImperial()
+double ConvertToImperial(double meterNumber, int imperialConvertUnit)
 {
-
+    double yard = meterNumber * 1.09361;
+    return Imperial(2, imperialConvertUnit, yard);
 }
 
-void ConvertToMetric()
+double ConvertToMetric(double yardNumber, int metricConvertUnit)
 {
-    Console.WriteLine("You want to convert a imperial unit to metric");
+    double meter = yardNumber * 0.9144;
+    return Metric(2, metricConvertUnit, meter);
+
 }
 
 int MenuOptions(Dictionary<string, int> options,string message)

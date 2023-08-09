@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 var METRIC_UNITS = new Dictionary<string, int>
@@ -25,15 +26,30 @@ while(!end_program) {
     switch (startingGroup)
     {
         case "metric":
-            Console.Write("Do you want to convert to 'Imperial' or convert one 'Metric' unit to another?: ");
+            int startingUnitMetric = MenuOptions(METRIC_UNITS, "starting unit");
+            if(startingUnitMetric == -1)
+            {
+                break;
+            }
+            double startingNumMetric = NumberInput(METRIC_UNITS.ElementAt(startingUnitMetric).Key);
+
+            Console.Write("Do you want to convert to 'Imperial' or convert to another 'Metric' unit?: ");
             string metricConvertTo = Console.ReadLine().ToLower();
+
             switch (metricConvertTo)
             {
                 case "imperial":
                     ConvertToImperial();
                     break;
                 case "metric":
-                    Metric();
+                    int endingUnitmetric = MenuOptions(METRIC_UNITS, "ending unit");
+                    if(endingUnitmetric != -1)
+                    {
+                        double metric_end = Metric(startingUnitMetric, endingUnitmetric, startingNumMetric);
+                        
+                        Console.WriteLine(startingNumMetric + " " + METRIC_UNITS.ElementAt(startingUnitMetric).Key +
+                            " is " + Math.Round(metric_end, 6) + " " + METRIC_UNITS.ElementAt(endingUnitmetric).Key);
+                    }
                     break;
                 default:
                     Console.WriteLine(SORRY);
@@ -41,7 +57,14 @@ while(!end_program) {
             }
             break;
         case "imperial":
-            Console.Write("Do you want to convert to 'Metric' or convert one 'Imperial' unit to another?: ");
+            int startingUnitImperial = MenuOptions(IMPERIAL_UNITS, "starting unit");
+            if(startingUnitImperial == -1)
+            {
+                break;
+            }
+            double startingNumImperial = NumberInput(IMPERIAL_UNITS.ElementAt(startingUnitImperial).Key);
+
+            Console.Write("Do you want to convert to 'Metric' or convert to another 'Imperial' unit?: ");
             string imperialConvertTo = Console.ReadLine().ToLower();
             switch (imperialConvertTo)
             {
@@ -49,7 +72,11 @@ while(!end_program) {
                     ConvertToMetric();
                     break;
                 case "imperial":
-                    Imperial();
+                    int endingUnitImperial = MenuOptions(IMPERIAL_UNITS, "ending unit");
+
+                    double imperialEnd = Imperial(startingUnitImperial, endingUnitImperial, startingNumImperial);
+                    Console.WriteLine(startingNumImperial + " " + IMPERIAL_UNITS.ElementAt(startingUnitImperial).Key +
+                        " is " + Math.Round(imperialEnd, 6) + " " + IMPERIAL_UNITS.ElementAt(endingUnitImperial).Key);
                     break;
                 default:
                     Console.WriteLine(SORRY);
@@ -72,73 +99,44 @@ while(!end_program) {
 
 
 
-void Metric()
+double Metric(int startingUnitMetric, int endingUnitmetric, double start_num_metric)
 {
-    int startingUnitMetric = MenuOptions(METRIC_UNITS, "starting unit");
-    int endingUnitmetric = -1;
-    if(startingUnitMetric != -1)
-    {
-        MenuOptions(METRIC_UNITS, "ending unit");
-    }
-    if (startingUnitMetric != -1 && endingUnitmetric != -1)
-    {
-        Console.Write("Enter the starting number: ");
-        double start_num_metric = double.Parse(Console.ReadLine());
-        double end_num_metric = 1;
-
+    double metric_end = 1;
         if (startingUnitMetric < endingUnitmetric)
         {
             for (int i = startingUnitMetric + 1; i <= endingUnitmetric; i++)
             {
-                end_num_metric *= METRIC_DECIMALS[i];
+            metric_end *= METRIC_DECIMALS[i];
             }
         }
         else
         {
             for (int i = startingUnitMetric; i > endingUnitmetric; i--)
             {
-                end_num_metric *= METRIC_UNITS.ElementAt(i).Value;
+            metric_end *= METRIC_UNITS.ElementAt(i).Value;
             }
         }
-        double finalMetric = end_num_metric * start_num_metric;
-        Console.WriteLine(start_num_metric + " " + METRIC_UNITS.ElementAt(startingUnitMetric).Key +
-            " is " + Math.Round(finalMetric, 6) + " " + METRIC_UNITS.ElementAt(endingUnitmetric).Key);
-    }
+    return metric_end * start_num_metric;
 }
 
-void Imperial()
+double Imperial(int startingUnitImperial, int endingUnitImperial, double startingNumImperial)
 {
-    int startingUnitImperial = MenuOptions(IMPERIAL_UNITS, "starting unit");
-    int endingUnitImperial = -1;
-    if(startingUnitImperial != -1)
+    double end_num_imperial = 1;
+    
+    if(startingUnitImperial > endingUnitImperial)
     {
-        endingUnitImperial = MenuOptions(IMPERIAL_UNITS, "ending unit");
-    }
-    if (startingUnitImperial != -1 && endingUnitImperial != -1)
-    {
-        Console.Write("Enter the starting number: ");
-        double start_num_imperial = double.Parse(Console.ReadLine());
-        double end_num_imperial = 1;
-
-        if(startingUnitImperial > endingUnitImperial)
+        for(int i= startingUnitImperial; i > endingUnitImperial; i--)
         {
-            for(int i= startingUnitImperial; i > endingUnitImperial; i--)
-            {
-                end_num_imperial *= IMPERIAL_UNITS.ElementAt(i).Value;
-            }
-        } else
-        {
-            for(int i=startingUnitImperial+1; i <= endingUnitImperial; i++)
-            {
-                Console.WriteLine(IMPERIAL_UNITS.ElementAt(i).Value);
-                end_num_imperial /= IMPERIAL_UNITS.ElementAt(i).Value;
-            }
+            end_num_imperial *= IMPERIAL_UNITS.ElementAt(i).Value;
         }
-        double finalImperial = end_num_imperial * start_num_imperial;
-        Console.WriteLine(start_num_imperial + " " + IMPERIAL_UNITS.ElementAt(startingUnitImperial).Key + 
-            " is " + Math.Round(finalImperial,6) + " " + IMPERIAL_UNITS.ElementAt(endingUnitImperial).Key);
+    } else
+    {
+        for(int i=startingUnitImperial+1; i <=  endingUnitImperial; i++)
+        {
+            end_num_imperial /= IMPERIAL_UNITS.ElementAt(i).Value;
+        }
     }
-        
+    return end_num_imperial * startingNumImperial;
 }
 
 void Temperature()
@@ -151,15 +149,13 @@ void Temperature()
     switch (choice)
     {
         case "1":
-            Console.Write("Input the temperature in fahrenheit: ");
-            double fromFahrenheit = double.Parse(Console.ReadLine());
+            double fromFahrenheit = NumberInput("fahrenheit");
 
             double toCelsius = Math.Round((fromFahrenheit - 32) * 0.5556, 2);
             Console.WriteLine(fromFahrenheit + "°F is " + toCelsius + "°C");
             break;
         case "2":
-            Console.Write("Input the temperature in celsius: ");
-            double fromCelsius = double.Parse(Console.ReadLine());
+            double fromCelsius = NumberInput("celsius");
             double toFahrenheit = Math.Round(fromCelsius * 1.8) + 32;
             Console.WriteLine(fromCelsius + "°C is " + toFahrenheit + "°F");
             break;
@@ -197,4 +193,10 @@ int MenuOptions(Dictionary<string, int> options,string message)
         Console.WriteLine("Sorry. That number is not on the list.");
         return -1;
     }
+}
+
+double NumberInput(string unit)
+{
+    Console.Write("Enter a number in " + unit +": ");
+    return double.Parse(Console.ReadLine());
 }

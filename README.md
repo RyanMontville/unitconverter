@@ -8,3 +8,5 @@ The program can currently convert:
 * A metric unit to an imperial unit such as millimeter to feet
 * Fahrenheit to celsius
 * Celsius to fahrenheit
+
+I am currently working on a Blazor frontend app.

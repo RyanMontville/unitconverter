@@ -1,0 +1,55 @@
+﻿@page "/temperature"
+
+<PageTitle>Temperature</PageTitle>
+
+<h1>Counter</h1>
+<input placeholder="temperature" @bind="startingTemperature" />
+<select @bind="@SelectedTempUnitID">
+
+    <option value=""></option>
+    @foreach(var TempUnit in TempUnitList)
+    {
+        <option value = "@TempUnit.Code"> @TempUnit.Name </option >
+    }
+}
+
+</select>
+
+<p role="status">Starting Temp: @startingTemperature°@SelectedTempUnitID</p>
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int startingTemperature;
+    string selectedTempUnitID;
+
+    string SelectedTempUnitID
+    {
+        get => selectedTempUnitID;
+        set
+        {
+            selectedTempUnitID = value;
+
+        }
+    }
+
+    List<TempUnit> TempUnitList = new List<TempUnit>() { new TempUnit ("F", "Fahrenheit "),
+                                                      new TempUnit ("C", "Celsius") };
+
+    public class TempUnit
+    {
+
+        public TempUnit(string code, string name)
+        {
+            Code = code;
+            Name = name;
+        }
+        public string Code { get; set; }
+        public string Name { get; set; }
+
+    }
+
+    private void IncrementCount()
+    {
+        startingTemperature++;
+    }
+}

@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVtcGVyYXR1cmUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ryanm/Documents/Git/unitconverter/Blazor/UnitConverter/UnitConverter/Pages/Weight.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VpZ2h0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ryanm/Documents/Git/unitconverter/Blazor/UnitConverter/UnitConverter/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

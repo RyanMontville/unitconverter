@@ -1,8 +1,8 @@
 ﻿@page "/temperature"
 
-<PageTitle>Temperature</PageTitle>
+<PageTitle>Temperature Converter</PageTitle>
 
-<h1>Counter</h1>
+<h1>Temperature Converter</h1>
 <input placeholder="temperature" @bind="startingTemperature" />
 <select @bind="@SelectedTempUnitID">
 
@@ -14,13 +14,14 @@
 }
 
 </select>
-
-<p role="status">Starting Temp: @startingTemperature°@SelectedTempUnitID</p>
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button class="btn btn-primary" @onclick="convertTemperature">Convert</button>
+<p role="status">@output</p>
 
 @code {
-    private int startingTemperature;
+    private double startingTemperature;
+    private double convertedTemperature;
     string selectedTempUnitID;
+    string output = "Enter a temperature to convert.";
 
     string SelectedTempUnitID
     {
@@ -30,6 +31,7 @@
             selectedTempUnitID = value;
 
         }
+
     }
 
     List<TempUnit> TempUnitList = new List<TempUnit>() { new TempUnit ("F", "Fahrenheit "),
@@ -48,8 +50,18 @@
 
     }
 
-    private void IncrementCount()
+
+    private void convertTemperature()
     {
-        startingTemperature++;
+        if (selectedTempUnitID == "F")
+        {
+            convertedTemperature = Math.Round((startingTemperature - 32) * 0.5556, 2);
+            output = startingTemperature + "°F is " + convertedTemperature + "°C.";
+        } else
+        {
+            convertedTemperature = Math.Round(startingTemperature * 1.8) + 32;
+            output = startingTemperature + "°C is " + convertedTemperature + "°F.";
+        }
     }
+
 }

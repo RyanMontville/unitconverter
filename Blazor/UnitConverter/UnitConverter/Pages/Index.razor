@@ -3,5 +3,159 @@
 <PageTitle>Distance Converter</PageTitle>
 
 <h1>Distance Converter</h1>
-<p>(Coming Soon)</p>
+<input placeholder="distance" @bind="startingDistance" />
+<select @bind="@SelectedStartingUnitId">
+	<option value=""></option>
+	@foreach (var TempUnit in DistanceUnitList)
+	{
+		<option value="@TempUnit.Code"> @TempUnit.Name </option>
+	}
+</select>
+To 
+<select @bind="@SelectedConvertedUnitId">
+	<option value=""></option>
+	@foreach (var TempUnit in DistanceUnitList)
+	{
+		<option value="@TempUnit.Code"> @TempUnit.Name </option>
+	}
+</select>
 
+<button class="btn btn-primary" @onclick="ConvertDistance">Convert</button>
+<p role="status">@output</p>
+
+<p>Starting: @selectedStartingUnitId, convereted:@selectedConvertedUnitId</p>
+
+@code {
+	private double startingDistance;
+	private double convertedDistance;
+	string selectedStartingUnitId;
+	string selectedConvertedUnitId;
+	string startingUnit;
+	string convertedUnit;
+	string output = "Enter a distance to convert.";
+
+	string SelectedStartingUnitId
+	{
+		get => selectedStartingUnitId;
+		set
+		{
+			selectedStartingUnitId = value;
+
+		}
+
+	}
+
+	string SelectedConvertedUnitId
+	{
+		get => selectedConvertedUnitId;
+		set
+		{
+			selectedConvertedUnitId = value;
+
+		}
+
+	}
+
+	List<DistanceUnit> DistanceUnitList = new List<DistanceUnit>() {
+		new DistanceUnit ("I0", "Inch"),
+		new DistanceUnit ("I1", "Foot"),
+		new DistanceUnit ("I2", "Yard"),
+		new DistanceUnit ("I3", "Mile"),
+		new DistanceUnit ("M0", "milimeter"),
+		new DistanceUnit ("M1", "centimeter"),
+		new DistanceUnit ("M2", "meter"),
+		new DistanceUnit ("M3", "kilometer")
+	};
+
+	public class DistanceUnit
+	{
+
+		public DistanceUnit(string code, string name)
+		{
+			Code = code;
+			Name = name;
+		}
+		public string Code { get; set; }
+		public string Name { get; set; }
+	}
+
+	var METRIC_UNITS = new Dictionary<string, int>
+		{
+			["Milimeter"] = 1,
+			["Centimeter"] = 10,
+			["Meter"] = 100,
+			["Kilometer"] = 1000
+		};
+	var IMPERIAL_UNITS = new Dictionary<string, int>
+		{
+			["Inch"] = 1,
+			["Feet"] = 12,
+			["Yard"] = 3,
+			["Mile"] = 1760
+		};
+
+	double[] METRIC_DECIMALS = { .1, .1, .01, .001 };
+
+	private double ConvertYardToMeter(double yardDistance)
+	{
+		return yardDistance * 0.9144;
+	}
+
+	private double ConvertMeterToYard(double meterDistance)
+	{
+		return meterDistance * 1.09361;
+	}
+
+	double Metric(int startingUnitMetric, int endingUnitmetric, double metricNumber)
+	{
+		if (startingUnitMetric < endingUnitmetric)
+		{
+			for (int i = startingUnitMetric + 1; i <= endingUnitmetric; i++)
+			{
+				metricNumber *= METRIC_DECIMALS[i];
+			}
+		}
+		else
+		{
+			for (int i = startingUnitMetric; i > endingUnitmetric; i--)
+			{
+				metricNumber *= METRIC_UNITS.ElementAt(i).Value;
+			}
+		}
+		return metricNumber;
+	}
+
+	double Imperial(int startingUnitImperial, int endingUnitImperial, double imperialNumber)
+	{
+		if (startingUnitImperial > endingUnitImperial)
+		{
+			for (int i = startingUnitImperial; i > endingUnitImperial; i--)
+			{
+				imperialNumber *= IMPERIAL_UNITS.ElementAt(i).Value;
+			}
+		}
+		else
+		{
+			for (int i = startingUnitImperial + 1; i <= endingUnitImperial; i++)
+			{
+				imperialNumber /= IMPERIAL_UNITS.ElementAt(i).Value;
+			}
+		}
+		return imperialNumber;
+	}
+
+	private void ConvertDistance()
+	{
+		int startIndex = Convert.ToInt32(Char.GetNumericValue(selectedStartingUnitId[1]));
+		int convertIndex = Convert.ToInt32(Char.GetNumericValue(selectedConvertedUnitId[1])); ;
+		string startGroup = selectedStartingUnitId[0]+"";
+		string convertGroup = selectedConvertedUnitId[0] + "";
+
+		output = "Staring unit is " + startIndex + " " + startGroup + ", end unit is " + convertIndex + " " + convertGroup;
+		//ToDo: fix error with unit arrays, doesn't seem to like to word var?
+
+		//ToDo: if converting metric to metric, call Metric method
+		//ToDo: if converting imperial to impaerial, call Imperial method
+		//If converting from one to the other, call First unitGroup method, then call ConvertToOther method, then call second unitGroup method
+	}
+}

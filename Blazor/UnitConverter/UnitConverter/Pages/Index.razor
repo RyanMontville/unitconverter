@@ -23,11 +23,9 @@ To
 <button class="btn btn-primary" @onclick="ConvertDistance">Convert</button>
 <p role="status">@output</p>
 
-<p>Starting: @selectedStartingUnitId, convereted:@selectedConvertedUnitId</p>
-
 @code {
-	private double startingDistance;
-	private double convertedDistance;
+	double startingDistance;
+	double convertedDistance;
 	string selectedStartingUnitId;
 	string selectedConvertedUnitId;
 	string startingUnit;
@@ -57,14 +55,14 @@ To
 	}
 
 	List<DistanceUnit> DistanceUnitList = new List<DistanceUnit>() {
-		new DistanceUnit ("I0", "Inch"),
-		new DistanceUnit ("I1", "Foot"),
-		new DistanceUnit ("I2", "Yard"),
-		new DistanceUnit ("I3", "Mile"),
-		new DistanceUnit ("M0", "milimeter"),
-		new DistanceUnit ("M1", "centimeter"),
-		new DistanceUnit ("M2", "meter"),
-		new DistanceUnit ("M3", "kilometer")
+		new DistanceUnit ("I0", "inches"),
+		new DistanceUnit ("I1", "feet"),
+		new DistanceUnit ("I2", "yards"),
+		new DistanceUnit ("I3", "miles"),
+		new DistanceUnit ("M0", "milimeters"),
+		new DistanceUnit ("M1", "centimeters"),
+		new DistanceUnit ("M2", "meters"),
+		new DistanceUnit ("M3", "kilometers")
 	};
 
 	public class DistanceUnit
@@ -79,20 +77,21 @@ To
 		public string Name { get; set; }
 	}
 
-	var METRIC_UNITS = new Dictionary<string, int>
-		{
-			["Milimeter"] = 1,
-			["Centimeter"] = 10,
-			["Meter"] = 100,
-			["Kilometer"] = 1000
-		};
-	var IMPERIAL_UNITS = new Dictionary<string, int>
-		{
-			["Inch"] = 1,
-			["Feet"] = 12,
-			["Yard"] = 3,
-			["Mile"] = 1760
-		};
+	Dictionary<string, int> METRIC_UNITS = new Dictionary<string, int>()
+	{
+		{"milimeters", 1},
+		{"centimeters", 10},
+		{"meters", 100},
+		{"kilometers", 1000}
+	};
+
+	Dictionary<string, int> IMPERIAL_UNITS = new Dictionary<string, int>()
+	{
+		{"inches", 1},
+		{"feet", 12 },
+		{"yards", 3 },
+		{"miles", 1760 }
+	};
 
 	double[] METRIC_DECIMALS = { .1, .1, .01, .001 };
 
@@ -151,11 +150,31 @@ To
 		string startGroup = selectedStartingUnitId[0]+"";
 		string convertGroup = selectedConvertedUnitId[0] + "";
 
-		output = "Staring unit is " + startIndex + " " + startGroup + ", end unit is " + convertIndex + " " + convertGroup;
-		//ToDo: fix error with unit arrays, doesn't seem to like to word var?
+		if(startGroup=="I" && convertGroup=="I")
+		{
+			double convertedNumber = Imperial(startIndex, convertIndex, startingDistance);
+			output = startingDistance + " " + IMPERIAL_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + IMPERIAL_UNITS.ElementAt(convertIndex).Key;
+		}
+		else if (startGroup == "M" && convertGroup == "M")
+		{
+			double convertedNumber = Metric(startIndex, convertIndex, startingDistance);
+			output = startingDistance + " " + METRIC_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + METRIC_UNITS.ElementAt(convertIndex).Key;
+		}
+		else if (startGroup == "I" && convertGroup == "M")
+		{
+			double yard = Imperial(startIndex, 2, startingDistance);
+			double meter = ConvertYardToMeter(yard);
+			double convertedNumber = Metric(2, convertIndex, meter);
+			output = startingDistance + " " + IMPERIAL_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + METRIC_UNITS.ElementAt(convertIndex).Key;
+		}
+		else if (startGroup == "M" && convertGroup == "I")
+		{
+			double meter = Metric(startIndex, 2, startingDistance);
+			double yard = ConvertMeterToYard(meter);
+			double convertedNumber = Imperial(2, convertIndex, yard);
+			output = startingDistance + " " + METRIC_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + IMPERIAL_UNITS.ElementAt(convertIndex).Key;
+		}
 
-		//ToDo: if converting metric to metric, call Metric method
-		//ToDo: if converting imperial to impaerial, call Imperial method
-		//If converting from one to the other, call First unitGroup method, then call ConvertToOther method, then call second unitGroup method
+		//ToDo: add error handling, make input type number and required, or have the ConvertDistance method check if any of the variables are null and display error message
 	}
 }

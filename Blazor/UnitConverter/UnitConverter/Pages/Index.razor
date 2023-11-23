@@ -6,17 +6,17 @@
 <input placeholder="distance" @bind="startingDistance" />
 <select @bind="@SelectedStartingUnitId">
 	<option value=""></option>
-	@foreach (var TempUnit in DistanceUnitList)
+	@foreach (var DistanceUnit in DistanceUnitList)
 	{
-		<option value="@TempUnit.Code"> @TempUnit.Name </option>
+		<option value="@DistanceUnit.Code"> @DistanceUnit.Name </option>
 	}
 </select>
 To 
 <select @bind="@SelectedConvertedUnitId">
 	<option value=""></option>
-	@foreach (var TempUnit in DistanceUnitList)
+	@foreach (var DistanceUnit in DistanceUnitList)
 	{
-		<option value="@TempUnit.Code"> @TempUnit.Name </option>
+		<option value="@DistanceUnit.Code"> @DistanceUnit.Name </option>
 	}
 </select>
 

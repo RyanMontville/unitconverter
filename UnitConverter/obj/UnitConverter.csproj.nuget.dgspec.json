@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ryanm\\Documents\\side projects\\c sharp tutorial\\UnitConverter\\UnitConverter\\UnitConverter.csproj": {}
+    "C:\\Users\\ryanm\\Documents\\Git\\unitconverter\\UnitConverter\\UnitConverter.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ryanm\\Documents\\side projects\\c sharp tutorial\\UnitConverter\\UnitConverter\\UnitConverter.csproj": {
+    "C:\\Users\\ryanm\\Documents\\Git\\unitconverter\\UnitConverter\\UnitConverter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ryanm\\Documents\\side projects\\c sharp tutorial\\UnitConverter\\UnitConverter\\UnitConverter.csproj",
+        "projectUniqueName": "C:\\Users\\ryanm\\Documents\\Git\\unitconverter\\UnitConverter\\UnitConverter.csproj",
         "projectName": "UnitConverter",
-        "projectPath": "C:\\Users\\ryanm\\Documents\\side projects\\c sharp tutorial\\UnitConverter\\UnitConverter\\UnitConverter.csproj",
+        "projectPath": "C:\\Users\\ryanm\\Documents\\Git\\unitconverter\\UnitConverter\\UnitConverter.csproj",
         "packagesPath": "C:\\Users\\ryanm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ryanm\\Documents\\side projects\\c sharp tutorial\\UnitConverter\\UnitConverter\\obj\\",
+        "outputPath": "C:\\Users\\ryanm\\Documents\\Git\\unitconverter\\UnitConverter\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ryanm\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

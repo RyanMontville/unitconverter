@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SmtmtOrmkKbFPPjNjRALUFOhKVcLdWlj4fIqfn62JYgACZlsLDkQjLatl9FzFCH1dND/qGY3oKq77yl6re49bw==",
+  "dgSpecHash": "x0sNOXgV7Lyv3LrqIGH1hyGd/SJw8gfAtZlbYrKhFl/UGd8BrgtW/XWjaIvd+RXQs2ucbYxX1tZpmXVc8PYp5g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ryanm\\Documents\\side projects\\c sharp tutorial\\UnitConverter\\UnitConverter\\UnitConverter.csproj",
+  "projectFilePath": "C:\\Users\\ryanm\\Documents\\Git\\unitconverter\\UnitConverter\\UnitConverter.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -83,6 +83,15 @@ main[b-9unhi55rez] {
 /* /Shared/NavMenu.razor.rz.scp.css */
 .navbar-toggler[b-aiycnv56j4] {
     background-color: #b81f24;
+    float: right;
+}
+
+.navbar-custom[b-aiycnv56j4] {
+    background-color: #b81f24;
+}
+
+.sidebar[b-aiycnv56j4] {
+    background-color: #b81f24;
 }
 
 .top-row[b-aiycnv56j4] {
@@ -104,6 +113,10 @@ main[b-9unhi55rez] {
 .nav-item[b-aiycnv56j4] {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
+}
+
+.sidebar a[b-aiycnv56j4] {
+    text-decoration: none;
 }
 
     .nav-item:first-of-type[b-aiycnv56j4] {

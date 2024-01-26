@@ -1,7 +1,7 @@
 {
   "entryAssembly": "UnitConverter",
   "resources": {
-    "hash": "sha256-4bNTMR39NmSf363B8UlIgnPl2JF9pcCPB3hcc/imJdQ=",
+    "hash": "sha256-pfeQHET62q+aYmMNp8JWUup8fsf6bmr5S4I4HKusheE=",
     "runtime": {
       "dotnet.6.0.25.6p11quxmjy.js": "sha256-1jUGCCSGH9JWhkqbHdQk8JBjBI8K/VC63En5zlypVps=",
       "dotnet.timezones.blat": "sha256-KsGUR9nqtXb3Hy6IrNlnc1HoSS+AFlsXTX9rq4oChtA=",
@@ -40,7 +40,7 @@
       "System.Runtime.dll": "sha256-qSn2RdEi7Ar2KBgoL58gPAh4tJ5SIwTYDQ0rB6aLWfc=",
       "System.Text.Encodings.Web.dll": "sha256-dDfaYKn0y42BzvV7JiiRHxGAOvpTJyuIvRqK3bnAARs=",
       "System.Text.Json.dll": "sha256-EiRmbxyaacHTJN/WIkN2FcFzA2Bw0dq5tMXkqA4iPEI=",
-      "UnitConverter.dll": "sha256-zKNSS58EGTHMvcA/iVHZNqxFLPpgKlWmgi6RgZI4p/w="
+      "UnitConverter.dll": "sha256-8HFhGJZ2qE91TVciM1azZyVLeWzNOnjd8MD8jtYcVCo="
     },
     "runtimeAssets": {
       "dotnet.wasm": {

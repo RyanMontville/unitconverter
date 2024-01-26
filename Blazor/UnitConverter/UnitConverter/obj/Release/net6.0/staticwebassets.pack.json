@@ -89,10 +89,6 @@
       "PackagePath": "staticwebassets\\manifest.json"
     },
     {
-      "Id": "C:\\Users\\ryanm\\Documents\\Git\\unitconverter\\Blazor\\UnitConverter\\UnitConverter\\wwwroot\\sample-data\\weather.json",
-      "PackagePath": "staticwebassets\\sample-data\\weather.json"
-    },
-    {
       "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.UnitConverter.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "z4x+i3FrtG9dt7TWhulKgz878+xVlCpeW7ECi98YRAo=",
+  "Hash": "jmadgMw++5gJgWSWllHOeddDdKkqioqLGCgKedogP4U=",
   "Source": "UnitConverter",
   "BasePath": "/",
   "Mode": "Root",
@@ -2599,25 +2599,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\manifest.json"
-    },
-    {
-      "Identity": "C:\\Users\\ryanm\\Documents\\Git\\unitconverter\\Blazor\\UnitConverter\\UnitConverter\\wwwroot\\sample-data\\weather.json",
-      "SourceId": "UnitConverter",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\ryanm\\Documents\\Git\\unitconverter\\Blazor\\UnitConverter\\UnitConverter\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "sample-data/weather.json",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\sample-data\\weather.json"
     }
   ]
 }

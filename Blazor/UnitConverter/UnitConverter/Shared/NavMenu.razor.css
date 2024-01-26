@@ -1,5 +1,14 @@
 .navbar-toggler {
     background-color: #b81f24;
+    float: right;
+}
+
+.navbar-custom {
+    background-color: #b81f24;
+}
+
+.sidebar {
+    background-color: #b81f24;
 }
 
 .top-row {
@@ -21,6 +30,10 @@
 .nav-item {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
+}
+
+.sidebar a {
+    text-decoration: none;
 }
 
     .nav-item:first-of-type {

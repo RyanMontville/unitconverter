@@ -1,36 +1,57 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Unit Converter</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
+﻿<div class="nav-menu">
+    <a class="navbar-brand" href="">Unit Converter</a>
+    <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="material-symbols-outlined">
+            menu
+        </span>
+    </button>
+    <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+        <div class="nav-item">
+            <a href="https://www.ryanmontville.com">
+                <span class="material-symbols-outlined">
+                    arrow_back
+                </span>
+                RyanMontville.com
+            </a>
+        </div>
+        <div class="nav-item">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="material-symbols-outlined">
                     straighten
                 </span>  Distance
             </NavLink>
         </div>
-        <div class="nav-item px-3">
+        <div class="nav-item">
             <NavLink class="nav-link" href="temperature">
                 <span class="material-symbols-outlined">
                     device_thermostat
                 </span> Temperature
             </NavLink>
         </div>
-        <div class="nav-item px-3">
+        <div class="nav-item">
             <NavLink class="nav-link" href="weight">
                 <span class="material-symbols-outlined">
                     scale
                 </span> Weight
             </NavLink>
         </div>
-    </nav>
+        <div class="nav-item">
+            <a href="https://github.com/RyanMontville/unitconverter" target="_blank">
+                <span class="material-symbols-outlined">
+                    code
+                </span> View this project on Github
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="https://www.linkedin.com/in/ryanmontville/" target="_blank">
+                <span class="material-symbols-outlined">
+                    <span class="material-symbols-outlined">
+                        account_circle
+                    </span>
+                </span> LinkedIn
+            </a>
+        </div>
+    </div>
 </div>
 
 @code {

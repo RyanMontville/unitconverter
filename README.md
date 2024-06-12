@@ -1,5 +1,7 @@
 # unitconverter
-A C# unit converter console program
+In 2023 I wanted to learn C# to see how it compared to Java. After learning the basics I created this unit converter app. It uses Blazor as the web interface.
+
+Click <a href="https://ryanmontville.github.io/unitconverter/">here</a> to run the app.
 
 The program can currently convert:
 * An imperial unit to another imperial unit such as feet to yards
@@ -9,4 +11,4 @@ The program can currently convert:
 * Fahrenheit to celsius
 * Celsius to fahrenheit
 
-I am currently working on a Blazor frontend app.
+The app also shows a history of the past conversions.

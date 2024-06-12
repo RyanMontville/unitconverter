@@ -1,0 +1,75 @@
+﻿@page "/temperature"
+
+<PageTitle>Temperature Converter</PageTitle>
+
+<h1>Temperature Converter</h1>
+<input placeholder="temperature" @bind="startingTemperature" />
+<select @bind="@SelectedTempUnitID">
+
+    <option value=""></option>
+    @foreach (var TempUnit in TempUnitList)
+    {
+        <option value="@TempUnit.Code"> @TempUnit.Name </option>
+    }
+
+</select>
+<button class="btn btn-primary" @onclick="ConvertTemperature">Convert</button>
+<p role="status">@output</p>
+<h2>History</h2>
+@foreach (var conversion in history)
+{
+    <p>@conversion</p>
+}
+
+@code {
+    private double startingTemperature;
+    private double convertedTemperature;
+    string selectedTempUnitID;
+    string output = "Enter a temperature to convert.";
+    List<string> history = new List<string>();
+
+    string SelectedTempUnitID
+    {
+        get => selectedTempUnitID;
+        set
+        {
+            selectedTempUnitID = value;
+
+        }
+
+    }
+
+    List<TempUnit> TempUnitList = new List<TempUnit>() { new TempUnit ("F", "Fahrenheit "),
+                                                      new TempUnit ("C", "Celsius") };
+
+    public class TempUnit
+    {
+
+        public TempUnit(string code, string name)
+        {
+            Code = code;
+            Name = name;
+        }
+        public string Code { get; set; }
+        public string Name { get; set; }
+
+    }
+
+
+    private void ConvertTemperature()
+    {
+        if (selectedTempUnitID == "F")
+        {
+            convertedTemperature = Math.Round((startingTemperature - 32) * 0.5556, 2);
+            output = startingTemperature + "°F is " + convertedTemperature + "°C.";
+            history.Insert(0, output);
+        }
+        else
+        {
+            convertedTemperature = Math.Round(startingTemperature * 1.8) + 32;
+            output = startingTemperature + "°C is " + convertedTemperature + "°F.";
+            history.Insert(0, output);
+        }
+    }
+
+}

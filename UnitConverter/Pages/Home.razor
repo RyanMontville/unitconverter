@@ -1,0 +1,191 @@
+﻿@page "/"
+
+<PageTitle>Distance Converter</PageTitle>
+
+<h1>Distance Converter</h1>
+<input placeholder="distance" @bind="startingDistance" />
+<select @bind="@SelectedStartingUnitId">
+	<option value=""></option>
+	@foreach (var DistanceUnit in DistanceUnitList)
+	{
+		<option value="@DistanceUnit.Code"> @DistanceUnit.Name </option>
+	}
+</select>
+To
+<select @bind="@SelectedConvertedUnitId">
+	<option value=""></option>
+	@foreach (var DistanceUnit in DistanceUnitList)
+	{
+		<option value="@DistanceUnit.Code"> @DistanceUnit.Name </option>
+	}
+</select>
+
+<button class="btn btn-primary" @onclick="ConvertDistance">Convert</button>
+<p role="status">@output</p>
+<h2>History</h2>
+@foreach (var conversion in history)
+{
+	<p>@conversion</p>
+}
+
+@code {
+	double startingDistance;
+	double convertedDistance;
+	string selectedStartingUnitId;
+	string selectedConvertedUnitId;
+	string startingUnit;
+	string convertedUnit;
+	string output = "Enter a distance to convert.";
+	List<string> history = new List<string>();
+
+	string SelectedStartingUnitId
+	{
+		get => selectedStartingUnitId;
+		set
+		{
+			selectedStartingUnitId = value;
+
+		}
+
+	}
+
+	string SelectedConvertedUnitId
+	{
+		get => selectedConvertedUnitId;
+		set
+		{
+			selectedConvertedUnitId = value;
+
+		}
+
+	}
+
+	List<DistanceUnit> DistanceUnitList = new List<DistanceUnit>() {
+		new DistanceUnit ("I0", "inches"),
+		new DistanceUnit ("I1", "feet"),
+		new DistanceUnit ("I2", "yards"),
+		new DistanceUnit ("I3", "miles"),
+		new DistanceUnit ("M0", "milimeters"),
+		new DistanceUnit ("M1", "centimeters"),
+		new DistanceUnit ("M2", "meters"),
+		new DistanceUnit ("M3", "kilometers")
+	};
+
+	public class DistanceUnit
+	{
+
+		public DistanceUnit(string code, string name)
+		{
+			Code = code;
+			Name = name;
+		}
+		public string Code { get; set; }
+		public string Name { get; set; }
+	}
+
+	Dictionary<string, int> METRIC_UNITS = new Dictionary<string, int>()
+	{
+		{"milimeters", 1},
+		{"centimeters", 10},
+		{"meters", 100},
+		{"kilometers", 1000}
+	};
+
+	Dictionary<string, int> IMPERIAL_UNITS = new Dictionary<string, int>()
+	{
+		{"inches", 1},
+		{"feet", 12 },
+		{"yards", 3 },
+		{"miles", 1760 }
+	};
+
+	double[] METRIC_DECIMALS = { .1, .1, .01, .001 };
+
+	private double ConvertYardToMeter(double yardDistance)
+	{
+		return yardDistance * 0.9144;
+	}
+
+	private double ConvertMeterToYard(double meterDistance)
+	{
+		return meterDistance * 1.09361;
+	}
+
+	double Metric(int startingUnitMetric, int endingUnitmetric, double metricNumber)
+	{
+		if (startingUnitMetric < endingUnitmetric)
+		{
+			for (int i = startingUnitMetric + 1; i <= endingUnitmetric; i++)
+			{
+				metricNumber *= METRIC_DECIMALS[i];
+			}
+		}
+		else
+		{
+			for (int i = startingUnitMetric; i > endingUnitmetric; i--)
+			{
+				metricNumber *= METRIC_UNITS.ElementAt(i).Value;
+			}
+		}
+		return metricNumber;
+	}
+
+	double Imperial(int startingUnitImperial, int endingUnitImperial, double imperialNumber)
+	{
+		if (startingUnitImperial > endingUnitImperial)
+		{
+			for (int i = startingUnitImperial; i > endingUnitImperial; i--)
+			{
+				imperialNumber *= IMPERIAL_UNITS.ElementAt(i).Value;
+			}
+		}
+		else
+		{
+			for (int i = startingUnitImperial + 1; i <= endingUnitImperial; i++)
+			{
+				imperialNumber /= IMPERIAL_UNITS.ElementAt(i).Value;
+			}
+		}
+		return imperialNumber;
+	}
+
+	private void ConvertDistance()
+	{
+		int startIndex = Convert.ToInt32(Char.GetNumericValue(selectedStartingUnitId[1]));
+		int convertIndex = Convert.ToInt32(Char.GetNumericValue(selectedConvertedUnitId[1])); ;
+		string startGroup = selectedStartingUnitId[0] + "";
+		string convertGroup = selectedConvertedUnitId[0] + "";
+
+		if (startGroup == "I" && convertGroup == "I")
+		{
+			double convertedNumber = Imperial(startIndex, convertIndex, startingDistance);
+			output = startingDistance + " " + IMPERIAL_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + IMPERIAL_UNITS.ElementAt(convertIndex).Key;
+			history.Insert(0, output);
+		}
+		else if (startGroup == "M" && convertGroup == "M")
+		{
+			double convertedNumber = Metric(startIndex, convertIndex, startingDistance);
+			output = startingDistance + " " + METRIC_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + METRIC_UNITS.ElementAt(convertIndex).Key;
+			history.Insert(0, output);
+		}
+		else if (startGroup == "I" && convertGroup == "M")
+		{
+			double yard = Imperial(startIndex, 2, startingDistance);
+			double meter = ConvertYardToMeter(yard);
+			double convertedNumber = Metric(2, convertIndex, meter);
+			output = startingDistance + " " + IMPERIAL_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + METRIC_UNITS.ElementAt(convertIndex).Key;
+			history.Insert(0, output);
+		}
+		else if (startGroup == "M" && convertGroup == "I")
+		{
+			double meter = Metric(startIndex, 2, startingDistance);
+			double yard = ConvertMeterToYard(meter);
+			double convertedNumber = Imperial(2, convertIndex, yard);
+			output = startingDistance + " " + METRIC_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + IMPERIAL_UNITS.ElementAt(convertIndex).Key;
+			history.Insert(0, output);
+		}
+
+		//ToDo: add error handling, make input type number and required, or have the ConvertDistance method check if any of the variables are null and display error message
+	}
+}
+

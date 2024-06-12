@@ -1,0 +1,190 @@
+﻿@page "/weight"
+
+<PageTitle>Weight Converter</PageTitle>
+
+<h1>Weight Converter</h1>
+<input placeholder="weight" @bind="startingWeight" />
+<select @bind="@SelectedStartingUnitId">
+	<option value=""></option>
+	@foreach (var WeighteUnit in WeightUnitList)
+	{
+		<option value="@WeighteUnit.Code"> @WeighteUnit.Name </option>
+	}
+</select>
+To
+<select @bind="@SelectedConvertedUnitId">
+	<option value=""></option>
+	@foreach (var WeighteUnit in WeightUnitList)
+	{
+		<option value="@WeighteUnit.Code"> @WeighteUnit.Name </option>
+	}
+</select>
+
+<button class="btn btn-primary" @onclick="ConvertWeight">Convert</button>
+<p role="status">@output</p>
+<h2>History</h2>
+@foreach (var conversion in history)
+{
+	<p>@conversion</p>
+}
+
+@code {
+	double startingWeight;
+	double convertedWeight;
+	string selectedStartingUnitId;
+	string selectedConvertedUnitId;
+	string startingUnit;
+	string convertedUnit;
+	string output = "Enter a weight to convert.";
+	List<string> history = new List<string>();
+
+	string SelectedStartingUnitId
+	{
+		get => selectedStartingUnitId;
+		set
+		{
+			selectedStartingUnitId = value;
+
+		}
+
+	}
+
+	string SelectedConvertedUnitId
+	{
+		get => selectedConvertedUnitId;
+		set
+		{
+			selectedConvertedUnitId = value;
+
+		}
+
+	}
+
+	List<WeightUnit> WeightUnitList = new List<WeightUnit>() {
+		new WeightUnit ("I0", "ounces"),
+		new WeightUnit ("I1", "pounds"),
+		new WeightUnit ("I2", "US ton"),
+		new WeightUnit ("I3", "imperial ton"),
+		new WeightUnit ("M0", "milligram"),
+		new WeightUnit ("M1", "gram"),
+		new WeightUnit ("M2", "kilogram"),
+		new WeightUnit ("M3", "metric ton")
+	};
+
+	public class WeightUnit
+	{
+
+		public WeightUnit(string code, string name)
+		{
+			Code = code;
+			Name = name;
+		}
+		public string Code { get; set; }
+		public string Name { get; set; }
+	}
+
+	Dictionary<string, int> METRIC_UNITS = new Dictionary<string, int>()
+	{
+		{"milligram", 1},
+		{"gram", 1000},
+		{"kilogram", 1000},
+		{"metric ton", 1000}
+	};
+
+	Dictionary<string, double> IMPERIAL_UNITS = new Dictionary<string, double>()
+	{
+		{"ounces", 1},
+		{"pounds", 16},
+		{"US ton", 2000 },
+		{"imperial ton", 1.12 }
+	};
+
+	double[] METRIC_DECIMALS = { .001, .001, .001, .001 };
+
+	private double ConvertImperialTonToMetricTon(double imperialDistance)
+	{
+		return imperialDistance * 1.01605;
+	}
+
+	private double ConvertMetricTonToImperialTon(double metricDistance)
+	{
+		return metricDistance / 1.01605;
+	}
+
+	double Metric(int startingUnitMetric, int endingUnitmetric, double metricNumber)
+	{
+		if (startingUnitMetric < endingUnitmetric)
+		{
+			for (int i = startingUnitMetric + 1; i <= endingUnitmetric; i++)
+			{
+				metricNumber *= METRIC_DECIMALS[i];
+			}
+		}
+		else
+		{
+			for (int i = startingUnitMetric; i > endingUnitmetric; i--)
+			{
+				metricNumber *= METRIC_UNITS.ElementAt(i).Value;
+			}
+		}
+		return metricNumber;
+	}
+
+	double Imperial(int startingUnitImperial, int endingUnitImperial, double imperialNumber)
+	{
+		if (startingUnitImperial > endingUnitImperial)
+		{
+			for (int i = startingUnitImperial; i > endingUnitImperial; i--)
+			{
+				imperialNumber *= IMPERIAL_UNITS.ElementAt(i).Value;
+			}
+		}
+		else
+		{
+			for (int i = startingUnitImperial + 1; i <= endingUnitImperial; i++)
+			{
+				imperialNumber /= IMPERIAL_UNITS.ElementAt(i).Value;
+			}
+		}
+		return imperialNumber;
+	}
+
+	private void ConvertWeight()
+	{
+		int startIndex = Convert.ToInt32(Char.GetNumericValue(selectedStartingUnitId[1]));
+		int convertIndex = Convert.ToInt32(Char.GetNumericValue(selectedConvertedUnitId[1])); ;
+		string startGroup = selectedStartingUnitId[0] + "";
+		string convertGroup = selectedConvertedUnitId[0] + "";
+
+		if (startGroup == "I" && convertGroup == "I")
+		{
+			double convertedNumber = Imperial(startIndex, convertIndex, startingWeight);
+			output = startingWeight + " " + IMPERIAL_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + IMPERIAL_UNITS.ElementAt(convertIndex).Key;
+			history.Insert(0, output);
+		}
+		else if (startGroup == "M" && convertGroup == "M")
+		{
+			double convertedNumber = Metric(startIndex, convertIndex, startingWeight);
+			output = startingWeight + " " + METRIC_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + METRIC_UNITS.ElementAt(convertIndex).Key;
+			history.Insert(0, output);
+		}
+		else if (startGroup == "I" && convertGroup == "M")
+		{
+			double imperialTon = Imperial(startIndex, 3, startingWeight);
+			double metricTon = ConvertImperialTonToMetricTon(imperialTon);
+			double convertedNumber = Metric(3, convertIndex, metricTon);
+			output = startingWeight + " " + IMPERIAL_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + METRIC_UNITS.ElementAt(convertIndex).Key;
+			history.Insert(0, output);
+		}
+		else if (startGroup == "M" && convertGroup == "I")
+		{
+			double metricTon = Metric(startIndex, 3, startingWeight);
+			double imperialTon = ConvertMetricTonToImperialTon(metricTon);
+			double convertedNumber = Imperial(3, convertIndex, imperialTon);
+			output = startingWeight + " " + METRIC_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + IMPERIAL_UNITS.ElementAt(convertIndex).Key;
+			history.Insert(0, output);
+		}
+
+		//ToDo: add error handling, make input type number and required, or have the ConvertDistance method check if any of the variables are null and display error message
+	}
+}

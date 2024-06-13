@@ -11,7 +11,13 @@
         </div>
 
         <article class="content px-4">
-            @Body
+            <CascadingValue Value="@globalHistory">
+                @Body
+            </CascadingValue>
         </article>
     </main>
 </div>
+
+@code {
+    private List<string> globalHistory = new List<string>();
+}

@@ -23,7 +23,7 @@ To
 <button class="btn btn-primary" @onclick="ConvertWeight">Convert</button>
 <p role="status">@output</p>
 <h2>History</h2>
-@foreach (var conversion in history)
+@foreach (var conversion in globalHistory)
 {
 	<p>@conversion</p>
 }
@@ -36,7 +36,9 @@ To
 	string startingUnit;
 	string convertedUnit;
 	string output = "Enter a weight to convert.";
-	List<string> history = new List<string>();
+
+	[CascadingParameter]
+	public List<string>? globalHistory { get; set; }
 
 	string SelectedStartingUnitId
 	{
@@ -160,13 +162,13 @@ To
 		{
 			double convertedNumber = Imperial(startIndex, convertIndex, startingWeight);
 			output = startingWeight + " " + IMPERIAL_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + IMPERIAL_UNITS.ElementAt(convertIndex).Key;
-			history.Insert(0, output);
+			globalHistory.Insert(0, output);
 		}
 		else if (startGroup == "M" && convertGroup == "M")
 		{
 			double convertedNumber = Metric(startIndex, convertIndex, startingWeight);
 			output = startingWeight + " " + METRIC_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + METRIC_UNITS.ElementAt(convertIndex).Key;
-			history.Insert(0, output);
+			globalHistory.Insert(0, output);
 		}
 		else if (startGroup == "I" && convertGroup == "M")
 		{
@@ -174,7 +176,7 @@ To
 			double metricTon = ConvertImperialTonToMetricTon(imperialTon);
 			double convertedNumber = Metric(3, convertIndex, metricTon);
 			output = startingWeight + " " + IMPERIAL_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + METRIC_UNITS.ElementAt(convertIndex).Key;
-			history.Insert(0, output);
+			globalHistory.Insert(0, output);
 		}
 		else if (startGroup == "M" && convertGroup == "I")
 		{
@@ -182,9 +184,7 @@ To
 			double imperialTon = ConvertMetricTonToImperialTon(metricTon);
 			double convertedNumber = Imperial(3, convertIndex, imperialTon);
 			output = startingWeight + " " + METRIC_UNITS.ElementAt(startIndex).Key + " is " + convertedNumber + " " + IMPERIAL_UNITS.ElementAt(convertIndex).Key;
-			history.Insert(0, output);
+			globalHistory.Insert(0, output);
 		}
-
-		//ToDo: add error handling, make input type number and required, or have the ConvertDistance method check if any of the variables are null and display error message
 	}
 }

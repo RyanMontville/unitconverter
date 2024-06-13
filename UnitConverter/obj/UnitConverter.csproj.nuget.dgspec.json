@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ryan\\Documents\\unit\\UnitConverter\\UnitConverter\\UnitConverter.csproj": {}
+    "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\UnitConverter.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ryan\\Documents\\unit\\UnitConverter\\UnitConverter\\UnitConverter.csproj": {
+    "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\UnitConverter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ryan\\Documents\\unit\\UnitConverter\\UnitConverter\\UnitConverter.csproj",
+        "projectUniqueName": "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\UnitConverter.csproj",
         "projectName": "UnitConverter",
-        "projectPath": "C:\\Users\\Ryan\\Documents\\unit\\UnitConverter\\UnitConverter\\UnitConverter.csproj",
+        "projectPath": "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\UnitConverter.csproj",
         "packagesPath": "C:\\Users\\Ryan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ryan\\Documents\\unit\\UnitConverter\\UnitConverter\\obj\\",
+        "outputPath": "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Ryan\\AppData\\Roaming\\NuGet\\NuGet.Config",

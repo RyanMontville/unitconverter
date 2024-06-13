@@ -16,7 +16,7 @@
 <button class="btn btn-primary" @onclick="ConvertTemperature">Convert</button>
 <p role="status">@output</p>
 <h2>History</h2>
-@foreach (var conversion in history)
+@foreach (var conversion in globalHistory)
 {
     <p>@conversion</p>
 }
@@ -26,7 +26,9 @@
     private double convertedTemperature;
     string selectedTempUnitID;
     string output = "Enter a temperature to convert.";
-    List<string> history = new List<string>();
+
+    [CascadingParameter]
+    public List<string>? globalHistory { get; set; }
 
     string SelectedTempUnitID
     {
@@ -62,13 +64,13 @@
         {
             convertedTemperature = Math.Round((startingTemperature - 32) * 0.5556, 2);
             output = startingTemperature + "°F is " + convertedTemperature + "°C.";
-            history.Insert(0, output);
+            globalHistory.Insert(0, output);
         }
         else
         {
             convertedTemperature = Math.Round(startingTemperature * 1.8) + 32;
             output = startingTemperature + "°C is " + convertedTemperature + "°F.";
-            history.Insert(0, output);
+            globalHistory.Insert(0, output);
         }
     }
 

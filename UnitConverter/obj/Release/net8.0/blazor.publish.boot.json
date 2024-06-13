@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "UnitConverter",
   "resources": {
-    "hash": "sha256-e3inR7EeyOB6+GZquo9OjivJlJs9VnH/SbF/iAekuUc=",
+    "hash": "sha256-NX9FloEOc7IdyrHM6EoRf3G2/IML4QR9IWYetLhBCIs=",
     "jsModuleNative": {
       "dotnet.native.8.0.5.rnn5ykl5l5.js": "sha256-boyHe+0RMZDkzBKGhsrnXPhPg3oZ6UqJnTUzngJPjNY="
     },
@@ -46,7 +46,7 @@
       "System.Text.Encodings.Web.wasm": "sha256-V69v6JYAgTsrgM4epAyn/+1+KjM60Hxzokb2hKtbPt0=",
       "System.Text.Json.wasm": "sha256-n42G6dtH8ZLNiGlM75idHL7Ltdau1YP1Bmhkkx3WSPc=",
       "System.Text.RegularExpressions.wasm": "sha256-o6Ef/uOI9sFxJXKnXQbJnRMbcIIJ/ZFdc4fFqA9wu7Y=",
-      "UnitConverter.wasm": "sha256-+3GKfv1B0ev5lRPIQeLnn7REcrrhMNGEJ0MWnWCzRho="
+      "UnitConverter.wasm": "sha256-9Uo/h28RIvumdWwhck5EadaauWtJ9DaayOHtTOPXDQE="
     }
   },
   "cacheBootResources": true,

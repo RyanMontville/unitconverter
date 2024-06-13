@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7F3A897A-0B39-46C7-9615-F5816965ED07}|UnitConverter\\UnitConverter.csproj|c:\\users\\ryan\\documents\\git\\unitconverter\\unitconverter\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7F3A897A-0B39-46C7-9615-F5816965ED07}|UnitConverter\\UnitConverter.csproj|solutionrelative:unitconverter\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "UnitConverter\\Layout\\NavMenu.razor",
+              "ToolTip": "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "UnitConverter\\Layout\\NavMenu.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-13T22:12:34.427Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

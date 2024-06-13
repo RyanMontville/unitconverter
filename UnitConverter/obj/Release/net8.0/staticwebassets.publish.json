@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RmGu3AI+Xv9BChL3SOJX8rftB4zOdFVP2tydaRi2t4Y=",
+  "Hash": "2m4R+2FgBA5QyQh82SpxVrVQbeVP607Rylwa10MmZLQ=",
   "Source": "UnitConverter",
   "BasePath": "/",
   "Mode": "Root",
@@ -2390,6 +2390,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Identity": "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\wwwroot\\favicon.ico",
+      "SourceId": "UnitConverter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "favicon.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
       "Identity": "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\wwwroot\\favicon.png",

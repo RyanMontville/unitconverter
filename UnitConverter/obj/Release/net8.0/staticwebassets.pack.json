@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
+      "Id": "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
       "Id": "C:\\Users\\Ryan\\Documents\\git\\unitconverter\\UnitConverter\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },

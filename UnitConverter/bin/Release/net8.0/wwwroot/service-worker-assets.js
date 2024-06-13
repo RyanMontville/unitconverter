@@ -13,15 +13,19 @@
       "url": "css\/bootstrap\/bootstrap.min.css.map"
     },
     {
-      "hash": "sha256-4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg=",
+      "hash": "sha256-OTPS3pyc9iXjAmS2p3y4FbxIyxuOC5PJs4CeXj7r63I=",
+      "url": "favicon.ico"
+    },
+    {
+      "hash": "sha256-inTTQULk1O4\/xsuPvYVtW0ugUn\/N43s1pFifzK4MPw0=",
       "url": "favicon.png"
     },
     {
-      "hash": "sha256-DbpQaq68ZSb5IoPosBErM1QWBfsbTxpJqhU0REi6wP4=",
+      "hash": "sha256-SmtZakGDWrNw6AcBM2sL+W0N88I38XNrQhngtuT2F3g=",
       "url": "icon-192.png"
     },
     {
-      "hash": "sha256-oEo6d+KqX5fjxTiZk\/w9NB3Mi0+ycS5yLwCKwr4IkbA=",
+      "hash": "sha256-u340NP+VSWtLW3\/Bu2WtcB7hJrCmZRZw7p8FVm2Lw1k=",
       "url": "icon-512.png"
     },
     {
@@ -857,5 +861,5 @@
       "url": "_framework\/blazor.boot.json"
     }
   ],
-  "version": "KtpebQb7"
+  "version": "qy++BPRE"
 };
